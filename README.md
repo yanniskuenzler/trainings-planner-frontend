@@ -1,3 +1,3 @@
-# Abschlussprojekt ZLI
+# Abschlussprojekt ZLI Frontend
 ### Grundidee
 Inhalt...
