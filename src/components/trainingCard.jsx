@@ -2,60 +2,14 @@ import React, { Component } from 'react';
 
 class TrainingCard extends Component {
     state = {
-        id: "1023984701928734098324",
-        date: "23.06.2022",
-        weekday: "Monday",
-        trCategory: "Bahntraining",
-        duration: 20,
-        distance: 1.2,
-        content: [
-            {
-                "scCategory": "Laufen",
-                "value": "400m",
-                "index": "1"
-            },
-            {
-                "scCategory": "Pause",
-                "value": "90s",
-                "index": "2"
-            },
-            {
-                "scCategory": "Laufen",
-                "value": "400m",
-                "index": "3"
-            },
-            {
-                "scCategory": "Pause",
-                "value": "90s",
-                "index": "4"
-            },
-            {
-                "scCategory": "Laufen",
-                "value": "400m",
-                "index": "5"
-            },
-            {
-                "scCategory": "Pause",
-                "value": "90s",
-                "index": "6"
-            }
-        ]
-    }
-
-    getCardColor = () => {
-        let classes = "";
-        switch (this.state.trCategory) {
-            case "Bahntraining":
-                classes = "bg-primary text-white";
-                break;
-            case "Krafttraining":
-                classes = "bg-secondary text-white";
-                break;
-            default:
-                console.error("Fehler");
-        }
-        return classes;
-    }
+        id: this.props.training.id,
+        date: this.props.training.date,
+        weekday: this.props.training.weekday,
+        trCategory: this.props.training.trainingCategory,
+        duration: this.props.training.duration,
+        distance: this.props.training.distance,
+        content: this.props.training.content
+    };
 
     render() {
         return (
@@ -70,12 +24,12 @@ class TrainingCard extends Component {
                                 <li>Gesamtstrecke: {this.state.distance} Kilometer</li>
                             </ul>
                             <div className="d-flex justify-content-between m-3">
-                                <button className="btn btn-primary" data-toggle="collapse" data-target="#collapseSections">Mehr</button>
+                                <button className="btn btn-primary" data-toggle="collapse" data-target={"#collapseSections" + this.state.id}>Mehr</button>
                                 <button className="btn btn-danger float-right">Löschen</button>
                             </div>
 
-                            <div className="collapse" id="collapseSections">
-                                {this.state.content.map(c => <li>{c.scCategory}: {c.value}</li>)}
+                            <div className="collapse" id={"collapseSections" + this.state.id}>
+                                {this.state.content.map(c => <li>{c.sectionCategory}: {c.value}</li>)}
                             </div>
                         </div>
                     </div>
@@ -84,8 +38,20 @@ class TrainingCard extends Component {
         );
     }
 
-
-
+    getCardColor = () => {
+        let classes = "";
+        switch (this.state.trCategory) {
+            case "Bahntraining":
+                classes = "bg-light text-dark";
+                break;
+            case "Krafttraining":
+                classes = "bg-secondary text-white";
+                break;
+            default:
+                console.error("Fehler");
+        }
+        return classes;
+    }
 
 }
 
