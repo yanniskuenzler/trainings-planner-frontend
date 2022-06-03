@@ -14,9 +14,9 @@ class TrainingCards extends Component {
                 this.setState({
                     trainings: json,
                     isLoaded: true
-                });
+                }
+                );
             });
-        console.log("test");
     }
 
     render() {

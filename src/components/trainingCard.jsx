@@ -8,7 +8,7 @@ class TrainingCard extends Component {
         trCategory: this.props.training.trainingCategory,
         duration: this.props.training.duration,
         distance: this.props.training.distance,
-        content: this.props.training.content
+        contents: this.props.training.contents
     };
 
     render() {
@@ -16,7 +16,9 @@ class TrainingCard extends Component {
             <div>
                 <div className="container w-75 m-auto">
                     <div className={"card m-2 " + this.getCardColor()}>
-                        <div className="card-header">{`${this.state.weekday}, ${this.state.date}`}</div>
+                        <div className="card-header">
+                            {`${this.state.weekday}, ${this.state.date}`}
+                        </div>
                         <div className="card-body">
                             <h5 className="card-title">{this.state.trCategory}</h5>
                             <ul>
@@ -29,7 +31,7 @@ class TrainingCard extends Component {
                             </div>
 
                             <div className="collapse" id={"collapseSections" + this.state.id}>
-                                {this.state.content.map(c => <li>{c.sectionCategory}: {c.value}</li>)}
+                                {this.state.contents.map((content) => <li key={content.index}>{content.sectionCategory}: {content.value}</li>)}
                             </div>
                         </div>
                     </div>
@@ -45,10 +47,10 @@ class TrainingCard extends Component {
                 classes = "bg-light text-dark";
                 break;
             case "Krafttraining":
-                classes = "bg-secondary text-white";
+                classes = "bg-light text-dark";
                 break;
             default:
-                console.error("Fehler");
+                classes = "bg-light text-dark";
         }
         return classes;
     }
