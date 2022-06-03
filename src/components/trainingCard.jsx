@@ -26,8 +26,8 @@ class TrainingCard extends Component {
                                 <li>Gesamtstrecke: {this.state.distance} Kilometer</li>
                             </ul>
                             <div className="d-flex justify-content-between m-3">
-                                <button className="btn btn-primary" data-toggle="collapse" data-target={"#collapseSections" + this.state.id}>Mehr</button>
-                                <button className="btn btn-danger float-right">Löschen</button>
+                                <button type="button" className="btn btn-primary" data-toggle="collapse" data-target={"#collapseSections" + this.state.id}>Mehr</button>
+                                <button type="button" className="btn btn-danger float-right" onClick={() => this.props.onDelete(this.state.id)}>Löschen</button>
                             </div>
 
                             <div className="collapse" id={"collapseSections" + this.state.id}>

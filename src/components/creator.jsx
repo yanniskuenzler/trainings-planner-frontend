@@ -29,7 +29,7 @@ class Creator extends Component {
     render() {
         return (
             <div>
-                <button className="btn btn-success" data-toggle="modal" data-target="#creatorModal">erstellen</button>
+                <button type="button" className="btn btn-success" data-toggle="modal" data-target="#creatorModal">erstellen</button>
                 <div className="modal fade" id="creatorModal" tabIndex="-1">
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
