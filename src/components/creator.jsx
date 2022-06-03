@@ -1,22 +1,32 @@
 import React, {Component} from "react";
+import SectionField from "./sectionField";
 
 class Creator extends Component {
     state = {
         sections: [
-            {value: ""}
+            {value: "", category: ""}
         ]
     }
 
-    handleFormChange = (event, index) => {
+    handleInputChange = (event, index) => {
         let sections = [...this.state.sections];
-        sections[index].value = event.target.value;
+        sections[index][event.target.name] = event.target.value;
         this.setState({sections: sections});
     }
 
     handleAddField = () => {
         let sections = [...this.state.sections];
-        sections.push({value: ""});
+        sections.push({value: "", category: ""});
         this.setState({sections: sections});
+    }
+
+    handleDeleteField = (index) => {
+        let sections = [...this.state.sections];
+        sections.splice(index, 1);
+        console.log(sections);
+        debugger
+        this.setState({sections: sections});
+
     }
 
     render() {
@@ -46,7 +56,7 @@ class Creator extends Component {
                                     </div>
                                     <div className="form-group">
                                         {this.state.sections.map((section, index) => (
-                                            <input type="text" className="form-control" id="sectionValue" placeholder="Tätigkeit" value={section.value} key={index} onChange={(event) => this.handleFormChange(event, index)} />
+                                            <SectionField key={index} section={section} index={index} onFieldChange={this.handleInputChange} onFieldDelete={this.handleDeleteField} />
                                             )
                                         )}
 
