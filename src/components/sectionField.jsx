@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 
 class SectionField extends Component {
-    state = {}
-
     render() {
         return (
             <div className="form-row mt-1">
@@ -14,7 +12,7 @@ class SectionField extends Component {
                     <option>Disziplin</option>
                     <option>Sonstige</option>
                 </select>
-                <button className="btn btn-danger col-md-2" onClick={() => this.props.onFieldDelete(this.props.index)}>Löschen</button>
+                <button type="button" className="btn btn-danger col-md-2" onClick={() => this.props.onFieldDelete(this.props.index)}>Löschen</button>
             </div>
         );
     }

@@ -4,7 +4,7 @@ import SectionField from "./sectionField";
 class Creator extends Component {
     state = {
         sections: [
-            {value: "", category: ""}
+            {value: "", category: "", secUUID: crypto.randomUUID()}
         ]
     }
 
@@ -16,17 +16,14 @@ class Creator extends Component {
 
     handleAddField = () => {
         let sections = [...this.state.sections];
-        sections.push({value: "", category: ""});
+        let uuid = crypto.randomUUID();
+        sections.push({value: "", category: "", secUUID: uuid});
         this.setState({sections: sections});
     }
 
     handleDeleteField = (index) => {
-        let sections = [...this.state.sections];
-        sections.splice(index, 1);
-        console.log(sections);
-        debugger
+        let sections = this.state.sections.filter((section, i) => i !== index);
         this.setState({sections: sections});
-
     }
 
     render() {
@@ -37,13 +34,12 @@ class Creator extends Component {
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Training erstellen</h5>
+                                <h5 className="modal-title">Training erstellen</h5>
                                 <button type="button" className="close" data-dismiss="modal">
                                     <span>&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <button className="btn btn-primary" onClick={this.handleAddField}>weiteres Feld</button>
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="selectTrainingCategory">Training auswählen</label>
@@ -55,8 +51,18 @@ class Creator extends Component {
                                         </select>
                                     </div>
                                     <div className="form-group">
+                                        <label htmlFor="">Datum</label>
+                                        <div className="d-flex">
+                                            <input type="text" className="form-control" id="date" placeholder="Datum" />
+                                            <input type="text" className="form-control" placeholder="Wochentag" />
+                                        </div>
+                                        <label htmlFor="duration">Zeitdauer</label>
+                                        <input type="text" className="form-control" id="duration" placeholder="Anzahl Minuten" />
+                                    </div>
+                                    <button type="button" className="btn btn-primary" onClick={this.handleAddField}>weiteres Feld</button>
+                                    <div className="form-group m-1">
                                         {this.state.sections.map((section, index) => (
-                                            <SectionField key={index} section={section} index={index} onFieldChange={this.handleInputChange} onFieldDelete={this.handleDeleteField} />
+                                            <SectionField key={section.secUUID} section={section} index={index} onFieldChange={this.handleInputChange} onFieldDelete={this.handleDeleteField} />
                                             )
                                         )}
 
