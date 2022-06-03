@@ -14,26 +14,18 @@ class TrainingCards extends Component {
                 this.setState({
                     trainings: json,
                     isLoaded: true
-                }
-                );
+                });
             });
     }
 
     render() {
-        if (!this.state.isLoaded) {
-            return (
-                <div>Loading...</div>
-            )
-        } else {
-            return (
-                <div>
-                    {this.state.trainings.map((training, index) => <TrainingCard key={training.id} training={training} />)}
-                </div>
-            );
-        }
+        return (this.state.isLoaded ? (
+            <div>
+                {this.state.trainings.map((training, index) => <TrainingCard key={training.id} training={training} />)}
+            </div>
+        ) : <div>Loading...</div>);
 
     }
-
 }
 
 export default TrainingCards;

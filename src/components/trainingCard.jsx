@@ -41,18 +41,14 @@ class TrainingCard extends Component {
     }
 
     getCardColor = () => {
-        let classes = "";
         switch (this.state.trCategory) {
             case "Bahntraining":
-                classes = "bg-light text-dark";
-                break;
+                return "bg-light text-dark";
             case "Krafttraining":
-                classes = "bg-light text-dark";
-                break;
+                return "bg-light text-dark";
             default:
-                classes = "bg-light text-dark";
+                return "bg-light text-dark";
         }
-        return classes;
     }
 
 }
