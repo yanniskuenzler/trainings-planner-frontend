@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class SectionField extends Component {
+class FormSectionField extends Component {
     render() {
         return (
             <div className="form-row mt-1">
@@ -18,4 +18,4 @@ class SectionField extends Component {
     }
 }
 
-export default SectionField;
+export default FormSectionField;

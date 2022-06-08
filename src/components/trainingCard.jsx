@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import cardSectionField from "./cardSectionField";
+import CardSectionField from "./cardSectionField";
 
 class TrainingCard extends Component {
     state = {
@@ -31,7 +33,7 @@ class TrainingCard extends Component {
                             </div>
 
                             <div className="collapse" id={"collapseSections" + this.state.id}>
-                                {this.state.contents.map((content) => <li key={content.index}>{content.sectionCategory}: {content.value}</li>)}
+                                {this.state.contents.map((content) => <CardSectionField key={content.index} content={content}/>)}
                             </div>
                         </div>
                     </div>

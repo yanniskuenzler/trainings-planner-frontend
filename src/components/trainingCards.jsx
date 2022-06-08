@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
-import TrainingCard from "./trainingCard";
+import TrainingCard from "./trainingCard"
 
 class TrainingCards extends Component {
     state = {

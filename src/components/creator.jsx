@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import SectionField from "./sectionField";
+import FormSectionField from "./formSectionField";
 
 class Creator extends Component {
     state = {
@@ -62,7 +62,7 @@ class Creator extends Component {
                                     <button type="button" className="btn btn-primary" onClick={this.handleAddField}>weiteres Feld</button>
                                     <div className="form-group m-1">
                                         {this.state.sections.map((section, index) => (
-                                            <SectionField key={section.secUUID} section={section} index={index} onFieldChange={this.handleInputChange} onFieldDelete={this.handleDeleteField} />
+                                            <FormSectionField key={section.secUUID} section={section} index={index} onFieldChange={this.handleInputChange} onFieldDelete={this.handleDeleteField} />
                                             )
                                         )}
 
