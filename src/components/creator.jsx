@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import CreatorForm from "./creatorForm";
+import {validateDate, validateWeekday, validateDuration} from "./validateValues";
 
 class Creator extends Component {
     state = {
@@ -51,21 +52,22 @@ class Creator extends Component {
     }
 
     handleSubmit = () => {
+        let date = validateDate(this.state.trHeader.date.date);
+        let weekday = validateWeekday(this.state.trHeader.date.weekday);
+        let duration = validateDuration(this.state.trHeader.duration);
+
         let json = {
-            "date": this.state.trHeader.date.date,
-            "weekday": this.state.trHeader.date.weekday,
+            "date": date,
+            "weekday": weekday,
             "trainingCategory": this.state.trHeader.trainingCategory,
-            "duration": this.state.trHeader.duration,
+            "duration": duration,
             "distance": "10.0",
             "content": []
         };
 
-        let content = [];
         this.state.sections.forEach((item) => {
-            content.push({sectionCategory: item.category, value: item.value});
+            json.content.push({sectionCategory: item.category, value: item.value});
         });
-
-        json.content = content;
 
         console.log(json);
     }
@@ -105,7 +107,6 @@ class Creator extends Component {
                                     onFieldChange={this.handleFieldChange}
                                     onDeleteField={this.handleDeleteField}
                                     onAddField={this.handleAddField}
-                                    onSubmit={this.handleSubmit}
                                 />
                             </div>
                             <div className="modal-footer">
@@ -117,7 +118,7 @@ class Creator extends Component {
                                     Close
                                 </button>
                                 <button
-                                    type="submit"
+                                    type="button"
                                     form="creatorForm"
                                     className="btn btn-primary"
                                     onClick={this.handleSubmit}

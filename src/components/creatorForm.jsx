@@ -7,7 +7,7 @@ class CreatorForm extends Component {
 
     render() {
         return (
-            <form id="createrForm" onSubmit={this.props.onSubmit}>
+            <form id="createrForm">
                 <FormSelectTrainingCategory onInputChange={this.props.onInputChange} />
                 <FormWriteDateDuration
                     onInputChange={this.props.onInputChange}
