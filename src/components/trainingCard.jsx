@@ -44,7 +44,7 @@ class TrainingCard extends Component {
                                 </button>
                             </div>
                             <div className="collapse" id={"collapseSections" + this.state.id}>
-                                {this.state.contents.map((content) => <CardSectionField key={content.index} content={content}/>)}
+                                {this.state.contents.map((content, index) => <CardSectionField key={index} content={content}/>)}
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ class FormSectionField extends Component {
                     id="sectionValue"
                     name="value"
                     placeholder="Tätigkeit"
+                    pattern="\d"
                     value={this.props.section.value}
                     onChange={(event) => this.props.onFieldChange(event, this.props.index)}
                 />

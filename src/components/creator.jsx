@@ -3,8 +3,8 @@ import CreatorForm from "./creatorForm";
 
 class Creator extends Component {
     state = {
-        trHeaders: {
-                trainingCategory: "",
+        trHeader: {
+                trainingCategory: "Bahntraining",
                 date: {
                     date: "",
                     weekday: ""
@@ -14,7 +14,7 @@ class Creator extends Component {
         sections: [
             {
                 value: "",
-                category: "",
+                category: "Laufen",
                 secUUID: crypto.randomUUID()
             }
         ]
@@ -22,14 +22,14 @@ class Creator extends Component {
 
     handleInputChange = (event) => {
         let name = event.target.name;
-        let trHeaders = this.state.trHeaders;
+        let trHeader = this.state.trHeader;
         if (name === "date" || name === "weekday") {
-            trHeaders.date[name] = event.target.value;
+            trHeader.date[name] = event.target.value;
         } else {
-            trHeaders[name] = event.target.value;
+            trHeader[name] = event.target.value;
         }
 
-        this.setState({trHeaders});
+        this.setState({trHeader});
     }
 
     handleFieldChange = (event, index) => {
@@ -41,7 +41,7 @@ class Creator extends Component {
     handleAddField = () => {
         let sections = [...this.state.sections];
         let uuid = crypto.randomUUID();
-        sections.push({value: "", category: "", secUUID: uuid});
+        sections.push({value: "", category: "Laufen", secUUID: uuid});
         this.setState({sections});
     }
 
@@ -51,7 +51,23 @@ class Creator extends Component {
     }
 
     handleSubmit = () => {
+        let json = {
+            "date": this.state.trHeader.date.date,
+            "weekday": this.state.trHeader.date.weekday,
+            "trainingCategory": this.state.trHeader.trainingCategory,
+            "duration": this.state.trHeader.duration,
+            "distance": "10.0",
+            "content": []
+        };
 
+        let content = [];
+        this.state.sections.forEach((item) => {
+            content.push({sectionCategory: item.category, value: item.value});
+        });
+
+        json.content = content;
+
+        console.log(json);
     }
 
     render() {
@@ -89,6 +105,7 @@ class Creator extends Component {
                                     onFieldChange={this.handleFieldChange}
                                     onDeleteField={this.handleDeleteField}
                                     onAddField={this.handleAddField}
+                                    onSubmit={this.handleSubmit}
                                 />
                             </div>
                             <div className="modal-footer">
@@ -99,7 +116,14 @@ class Creator extends Component {
                                 >
                                     Close
                                 </button>
-                                <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Save changes</button>
+                                <button
+                                    type="submit"
+                                    form="creatorForm"
+                                    className="btn btn-primary"
+                                    onClick={this.handleSubmit}
+                                >
+                                    Save changes
+                                </button>
                             </div>
                         </div>
                     </div>
