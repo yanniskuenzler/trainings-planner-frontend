@@ -1,5 +1,5 @@
 export const validateDate = (date) => {
-    let pattern = /^(3[0-1]|[12][0-9]|[1-9])\.(1[0-2]|[1-9])\.([0-9]{4})$/;
+    let pattern = /^(3[0-1]|[12][0-9]|[1-9]|0[1-9])\.(1[0-2]|[1-9]|0[1-9])\.([0-9]{4})$/;
     if (pattern.test(date)) {
         let dateArray = date.split('.');
         return dateArray[2] + '-' + dateArray[1] + '-' + dateArray[0];

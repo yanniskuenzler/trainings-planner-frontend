@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from "axios";
 import CreatorForm from "./creatorForm";
 import {validateDate, validateWeekday, validateDuration} from "./validateValues";
 
@@ -18,7 +19,8 @@ class Creator extends Component {
                 category: "Laufen",
                 secUUID: crypto.randomUUID()
             }
-        ]
+        ],
+        validationIncomplete: false
     }
 
     handleInputChange = (event) => {
@@ -56,20 +58,36 @@ class Creator extends Component {
         let weekday = validateWeekday(this.state.trHeader.date.weekday);
         let duration = validateDuration(this.state.trHeader.duration);
 
-        let json = {
-            "date": date,
-            "weekday": weekday,
-            "trainingCategory": this.state.trHeader.trainingCategory,
-            "duration": duration,
-            "distance": "10.0",
-            "content": []
-        };
+        if (date !== false && weekday !== false && duration !== false) {
+            let json = {
+                "date": date,
+                "weekday": weekday,
+                "trainingCategory": this.state.trHeader.trainingCategory,
+                "duration": duration,
+                "distance": "10.0",
+                "content": []
+            };
 
-        this.state.sections.forEach((item) => {
-            json.content.push({sectionCategory: item.category, value: item.value});
-        });
+            this.state.sections.forEach((item) => {
+                json.content.push({sectionCategory: item.category, value: item.value});
+            });
 
-        console.log(json);
+            const options = {
+                method: 'post',
+                url: 'http://localhost:8080/addTraining',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                },
+                data: json
+            }
+            axios(options).then(() => {
+                console.log("success!");
+            });
+
+        } else {
+            alert("Du hast ungültige Werte eingegeben. Versuche es erneut.");
+        }
     }
 
     render() {
