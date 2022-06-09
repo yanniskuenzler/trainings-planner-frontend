@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import axios from "axios";
 import CreatorForm from "./creatorForm";
-import {validateDate, validateWeekday, validateDuration} from "./validateValues";
+import {validateDate, validateDuration, validateSectionValue} from "./validateValues";
 
 class Creator extends Component {
     state = {
         trainingHead: {
                 trainingCategory: "Bahntraining",
                 date: "",
-                weekday: "",
+                weekday: "Montag",
                 duration: ""
         },
         trainingBody: [
@@ -46,41 +46,38 @@ class Creator extends Component {
 
     handleSubmit = () => {
         let date = validateDate(this.state.trainingHead.date);
-        let weekday = validateWeekday(this.state.trainingHead.weekday);
         let duration = validateDuration(this.state.trainingHead.duration);
+        let trainingBody = validateSectionValue(this.state.trainingBody);
 
-        if (date.status && weekday.status && duration.status) {
+        if (date.status && trainingBody.status && duration.status) {
             let json = {
-                "date": date,
-                "weekday": weekday,
+                "date": date.date,
+                "weekday": this.state.trainingHead.weekday,
                 "trainingCategory": this.state.trainingHead.trainingCategory,
-                "duration": duration,
+                "duration": duration.duration,
                 "distance": "10.0",
-                "content": []
+                "trainingBody": []
             };
 
-            this.state.trainingBody.forEach((section) => {
-                json.content.push({sectionCategory: section.sectionCategory, sectionValue: section.sectionValue});
+            trainingBody.trainingBody.forEach((section) => {
+                json.trainingBody.push({sectionCategory: section.sectionCategory, sectionValue: section.sectionValue});
             });
 
             const options = {
                 method: 'post',
                 url: 'http://localhost:8080/addTraining',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-                },
                 data: json
             }
             axios(options).then(() => {
-                console.log("success!");
+                window.location.reload();
             });
 
         } else {
+            console.log(trainingBody);
             let response = "";
             if (!date.status) {response += date.msg + "\n"}
-            if (!weekday.status) {response += weekday.msg + "\n"}
             if (!duration.status) {response += duration.msg + "\n"}
+            if (!trainingBody.status) {response += trainingBody.msg + "\n"}
             alert(response);
         }
     }
@@ -88,14 +85,16 @@ class Creator extends Component {
     render() {
         return (
             <div>
-                <button
-                    type="button"
-                    className="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#creatorModal"
-                >
-                    erstellen
-                </button>
+                <div className="text-center">
+                    <button
+                        type="button"
+                        className="btn btn-outline-success m-2"
+                        data-toggle="modal"
+                        data-target="#creatorModal"
+                    >
+                        Training erstellen
+                    </button>
+                </div>
                 <div
                     className="modal fade"
                     id="creatorModal"
@@ -128,15 +127,15 @@ class Creator extends Component {
                                     className="btn btn-secondary"
                                     data-dismiss="modal"
                                 >
-                                    Close
+                                    Schliesen
                                 </button>
                                 <button
                                     type="button"
                                     form="creatorForm"
-                                    className="btn btn-primary"
+                                    className="btn btn-success"
                                     onClick={this.handleSubmit}
                                 >
-                                    Save changes
+                                    Erstellen
                                 </button>
                             </div>
                         </div>

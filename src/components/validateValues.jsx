@@ -9,15 +9,6 @@ export const validateDate = (date) => {
     }
 }
 
-export const validateWeekday = (weekday) => {
-    const weekdays = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
-    if (weekdays.includes(weekday)) {
-        return {status: true, weekday: weekday};
-    } else {
-        return {status: false, msg: "Bitte gib einen gültigen Wochentag an"};
-    }
-}
-
 export const validateDuration = (duration) => {
     let pattern = /^\d+$/;
     if (pattern.test(duration)){
@@ -25,4 +16,17 @@ export const validateDuration = (duration) => {
     } else {
         return {status: false, msg: "Bitte gib eine gültige Zeitdauer an"};
     }
+}
+
+export const validateSectionValue = (trainingBody) => {
+    let foundEmptyElement = false;
+    trainingBody.forEach((section) => {
+        if (section.sectionValue === "") {
+            console.log("false");
+            foundEmptyElement = true;
+        }
+    });
+    return (foundEmptyElement ?
+        {status: false, msg: "Bitte lasse kein Feld bei den Trainingseinheiten leer"} :
+        {status: true, trainingBody: trainingBody});
 }

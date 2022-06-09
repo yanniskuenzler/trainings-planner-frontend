@@ -16,7 +16,7 @@ class TrainingCards extends Component {
         axios(options).then(res => {
                 const trainings = res.data;
                 this.setState({trainings, isLoaded: true});
-            });
+        });
     }
 
     handleDeleteTraining = (id) => {
@@ -24,17 +24,11 @@ class TrainingCards extends Component {
 
         const options = {
             method: 'delete',
-            url: `http://localhost:8080/deleteTraining/${id}`,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-            }
+            url: `http://localhost:8080/deleteTraining/${id}`
         }
 
         axios(options).then(res => {
-                console.log(res);
-                console.log(res.data);
-                this.setState({trainings: trainings});
+                this.setState({trainings});
             });
     }
 

@@ -7,7 +7,7 @@ class FormSectionField extends Component {
                 <input
                     type="text"
                     className="form-control col-md-6"
-                    id="sectionValue"
+                    tabIndex="1"
                     name="sectionValue"
                     placeholder="Tätigkeit"
                     value={this.props.section.sectionValue}
@@ -15,8 +15,7 @@ class FormSectionField extends Component {
                 />
                 <select
                     className="form-control col-md-4"
-                    id="selectTrainingCategory"
-                    name="category"
+                    name="sectionCategory"
                     value={this.props.section.sectionCategory}
                     onChange={(event) => this.props.onFieldChange(event, this.props.index)}
                 >
