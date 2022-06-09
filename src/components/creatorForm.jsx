@@ -20,7 +20,7 @@ class CreatorForm extends Component {
                     weiteres Feld
                 </button>
                 <div className="form-group m-1">
-                    {this.props.sections.map((section, index) => (
+                    {this.props.trainingBody.map((section, index) => (
                             <FormSectionField
                                 key={section.secUUID}
                                 section={section}
@@ -30,7 +30,6 @@ class CreatorForm extends Component {
                             />
                         )
                     )}
-
                 </div>
             </form>
         )

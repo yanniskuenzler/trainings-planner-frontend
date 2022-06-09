@@ -11,14 +11,14 @@ class FormWriteDateDuration extends Component {
                         className="form-control"
                         id="date"
                         name="date"
-                        placeholder="Datum"
+                        placeholder="dd.mm.yyyy"
                         onChange={(event) => {this.props.onInputChange(event)}}
                     />
                     <input
                         type="text"
                         className="form-control"
                         name="weekday"
-                        placeholder="Wochentag"
+                        placeholder="Wochentag (z.B. Montag)"
                         onChange={(event) => {this.props.onInputChange(event)}}
                     />
                 </div>
@@ -28,7 +28,7 @@ class FormWriteDateDuration extends Component {
                     className="form-control"
                     id="duration"
                     name="duration"
-                    placeholder="Anzahl Minuten"
+                    placeholder="Anzahl Minuten (geschrieben ohne Einheit)"
                     onChange={(event) => {this.props.onInputChange(event)}}
                 />
             </div>

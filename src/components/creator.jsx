@@ -5,71 +5,62 @@ import {validateDate, validateWeekday, validateDuration} from "./validateValues"
 
 class Creator extends Component {
     state = {
-        trHeader: {
+        trainingHead: {
                 trainingCategory: "Bahntraining",
-                date: {
-                    date: "",
-                    weekday: ""
-                },
+                date: "",
+                weekday: "",
                 duration: ""
         },
-        sections: [
+        trainingBody: [
             {
-                value: "",
-                category: "Laufen",
+                sectionValue: "",
+                sectionCategory: "Laufen",
                 secUUID: crypto.randomUUID()
             }
-        ],
-        validationIncomplete: false
+        ]
     }
 
     handleInputChange = (event) => {
-        let name = event.target.name;
-        let trHeader = this.state.trHeader;
-        if (name === "date" || name === "weekday") {
-            trHeader.date[name] = event.target.value;
-        } else {
-            trHeader[name] = event.target.value;
-        }
-
-        this.setState({trHeader});
+        let trainingHead = this.state.trainingHead;
+        trainingHead[event.target.name] = event.target.value;
+        this.setState({trainingHead});
     }
 
     handleFieldChange = (event, index) => {
-        let sections = [...this.state.sections];
-        sections[index][event.target.name] = event.target.value;
-        this.setState({sections});
+        let trainingBody = [...this.state.trainingBody];
+        trainingBody[index][event.target.name] = event.target.value;
+        this.setState({trainingBody});
     }
 
     handleAddField = () => {
-        let sections = [...this.state.sections];
+        let trainingBody = [...this.state.trainingBody];
         let uuid = crypto.randomUUID();
-        sections.push({value: "", category: "Laufen", secUUID: uuid});
-        this.setState({sections});
+        trainingBody.push({sectionValue: "", sectionCategory: "Laufen", secUUID: uuid});
+        this.setState({trainingBody});
     }
 
     handleDeleteField = (index) => {
-        let sections = this.state.sections.filter((section, i) => i !== index);
-        this.setState({sections});
+        let trainingBody = this.state.trainingBody.filter((section, i) => i !== index);
+        this.setState({trainingBody});
     }
 
     handleSubmit = () => {
-        let date = validateDate(this.state.trHeader.date.date);
-        let weekday = validateWeekday(this.state.trHeader.date.weekday);
-        let duration = validateDuration(this.state.trHeader.duration);
+        let date = validateDate(this.state.trainingHead.date);
+        let weekday = validateWeekday(this.state.trainingHead.weekday);
+        let duration = validateDuration(this.state.trainingHead.duration);
 
-        if (date !== false && weekday !== false && duration !== false) {
+        if (date.status && weekday.status && duration.status) {
             let json = {
                 "date": date,
                 "weekday": weekday,
-                "trainingCategory": this.state.trHeader.trainingCategory,
+                "trainingCategory": this.state.trainingHead.trainingCategory,
                 "duration": duration,
                 "distance": "10.0",
                 "content": []
             };
 
-            this.state.sections.forEach((item) => {
-                json.content.push({sectionCategory: item.category, value: item.value});
+            this.state.trainingBody.forEach((section) => {
+                json.content.push({sectionCategory: section.sectionCategory, sectionValue: section.sectionValue});
             });
 
             const options = {
@@ -86,7 +77,11 @@ class Creator extends Component {
             });
 
         } else {
-            alert("Du hast ungültige Werte eingegeben. Versuche es erneut.");
+            let response = "";
+            if (!date.status) {response += date.msg + "\n"}
+            if (!weekday.status) {response += weekday.msg + "\n"}
+            if (!duration.status) {response += duration.msg + "\n"}
+            alert(response);
         }
     }
 
@@ -120,7 +115,7 @@ class Creator extends Component {
                             </div>
                             <div className="modal-body">
                                 <CreatorForm
-                                    sections={this.state.sections}
+                                    trainingBody={this.state.trainingBody}
                                     onInputChange={this.handleInputChange}
                                     onFieldChange={this.handleFieldChange}
                                     onDeleteField={this.handleDeleteField}

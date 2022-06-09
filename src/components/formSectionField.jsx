@@ -8,16 +8,16 @@ class FormSectionField extends Component {
                     type="text"
                     className="form-control col-md-6"
                     id="sectionValue"
-                    name="value"
+                    name="sectionValue"
                     placeholder="Tätigkeit"
-                    value={this.props.section.value}
+                    value={this.props.section.sectionValue}
                     onChange={(event) => this.props.onFieldChange(event, this.props.index)}
                 />
                 <select
                     className="form-control col-md-4"
                     id="selectTrainingCategory"
                     name="category"
-                    value={this.props.section.category}
+                    value={this.props.section.sectionCategory}
                     onChange={(event) => this.props.onFieldChange(event, this.props.index)}
                 >
                     <option>Laufen</option>
