@@ -55,7 +55,6 @@ class Creator extends Component {
                 "weekday": this.state.trainingHead.weekday,
                 "trainingCategory": this.state.trainingHead.trainingCategory,
                 "duration": duration.duration,
-                "distance": "10.0",
                 "trainingBody": []
             };
 

@@ -10,11 +10,11 @@ export const validateDate = (date) => {
 }
 
 export const validateDuration = (duration) => {
-    let pattern = /^\d+$/;
+    let pattern = /^\d{1,3}$/;
     if (pattern.test(duration)){
         return {status: true, duration: duration};
     } else {
-        return {status: false, msg: "Bitte gib eine gültige Zeitdauer an"};
+        return {status: false, msg: "Bitte gib eine gültige Zeitdauer an (nicht länger als 999 Minuten)"};
     }
 }
 
