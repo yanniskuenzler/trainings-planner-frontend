@@ -1,3 +1,2 @@
 # Abschlussprojekt ZLI Frontend
-### Grundidee
-Inhalt...
+### Trainingsplanner
