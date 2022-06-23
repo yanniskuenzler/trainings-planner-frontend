@@ -1,4 +1,3 @@
-import './App.css';
 import React, {Component} from "react";
 import TrainingCards from "./components/trainingCards";
 import Creator from "./components/creator";
