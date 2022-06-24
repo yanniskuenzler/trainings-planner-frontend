@@ -23,7 +23,7 @@ class TrainingCard extends Component {
     render() {
         return (
             <div>
-                <div className="container w-75 m-auto">
+                <div className="container md-w-75 sm-w-90 m-auto">
                     <div className={"card m-2 " + this.getCardColor()}>
                         <div className="card-header">
                             {`${this.state.weekday}, ${this.convertDate()}`}
@@ -51,7 +51,7 @@ class TrainingCard extends Component {
                         </div>
                         <div className="card-footer text-center p-0">
                             <a
-                                href="#"
+                                href="https://www.google.com"
                                 data-toggle="collapse"
                                 data-target={"#collapseSections" + this.state.id}
                                 style={this.linkStyle}

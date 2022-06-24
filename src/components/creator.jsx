@@ -64,7 +64,7 @@ class Creator extends Component {
 
             const options = {
                 method: 'post',
-                url: 'http://localhost:8080/addTraining',
+                url: 'https://trainings-planner-backend.herokuapp.com/addTraining',
                 data: json
             }
             axios(options).then(() => {

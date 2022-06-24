@@ -11,7 +11,7 @@ class TrainingCards extends Component {
     componentDidMount = () => {
         const options = {
             method: 'get',
-            url: `http://localhost:8080/getTrainings`
+            url: `https://trainings-planner-backend.herokuapp.com/getTrainings`
         }
         axios(options).then(res => {
                 const trainings = res.data;
@@ -24,7 +24,7 @@ class TrainingCards extends Component {
 
         const options = {
             method: 'delete',
-            url: `http://localhost:8080/deleteTraining/${id}`
+            url: `https://trainings-planner-backend.herokuapp.com/deleteTraining/${id}`
         }
 
         axios(options).then(res => {
